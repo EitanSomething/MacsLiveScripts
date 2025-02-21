@@ -1,0 +1,8 @@
+API.Function("Cut",Input:=4,Mix:=0)
+API.Function("LayerOff", Input:="Lower Third",  Value:="1")
+API.Function("LayerOff", Input:="Lower Third",  Value:="2")
+API.Function("TitleBeginAnimation", Input:="Sideline Reporter", Value:="TransitionIn")
+Sleep(100)
+API.Function("LayerOn", Input:="Lower Third",  Value:="3")
+Sleep(5000)
+API.Function("LayerOff", Input:="Lower Third",  Value:="3")

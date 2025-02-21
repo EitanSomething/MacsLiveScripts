@@ -1,0 +1,23 @@
+Function=AudioBusOFF&Input=JBS Commercials List&Value=Master
+Function=AudioBusOFF&Input=JBS Commercials List&Value=B
+Function=AudioBusOFF&Input=5&Value=A
+Function=AudioBusON&Input=7&Value=Master
+Function=AudioBusON&Input=8&Value=Master
+Function=AudioBusON&Input=9&Value=Master
+Function=AudioBusON&Input=7&Value=B
+Function=AudioBusON&Input=8&Value=B
+Function=AudioBusON&Input=9&Value=B
+Function=SetVolume&Input=12&Value=0
+Function=SetVolume&Input=13&Value=0
+
+Function=AudioBusON&Input=12&Value=Master
+Function=AudioBusON&Input=13&Value=Master
+Function=SetVolumeFade&Input=12&Value=70,100
+Function=SetVolumeFade&Input=13&Value=70,100
+
+Function=AudioBusOFF&Input=10&Value=Master
+Function=AudioBusOFF&Input=11&Value=Master
+Function=AudioBusOFF&Input=10&Value=A
+Function=AudioBusOFF&Input=11&Value=A
+Function=AudioBusOFF&Input=10&Value=B
+Function=AudioBusOFF&Input=11&Value=B

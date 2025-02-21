@@ -1,0 +1,19 @@
+Function=AudioBusON&Input=5&Value=A
+Function=AudioBusOFF&Input=7&Value=Master
+Function=AudioBusOFF&Input=8&Value=Master
+Function=AudioBusOFF&Input=9&Value=Master
+Function=AudioBusON&Input=7&Value=B
+Function=AudioBusON&Input=8&Value=B
+Function=AudioBusON&Input=9&Value=B
+Function=AudioBusOFF&Input=12&Value=Master
+Function=AudioBusOFF&Input=13&Value=Master
+Function=AudioBusOFF&Input=10&Value=Master
+Function=AudioBusOFF&Input=11&Value=Master
+Function=AudioBusOFF&Input=10&Value=A
+Function=AudioBusOFF&Input=11&Value=A
+Function=AudioBusOFF&Input=10&Value=B
+Function=AudioBusOFF&Input=11&Value=B
+Function=AudioBusON&Input=JBS Commercials List&Value=Master
+Function=AudioBusON&Input=7&Value=C
+Function=AudioBusON&Input=8&Value=C
+Function=AudioBusON&Input=9&Value=C

@@ -1,0 +1,18 @@
+dim DigitPress as String = "7"
+
+' Set up access to the vMix XML model
+dim VmixXML as new system.xml.xmldocument
+VmixXML.loadxml(API.XML)
+
+' Load in previous digits pressed (If Any)
+dim PlayerNumber as String = VmixXML.selectSingleNode("/vmix/dynamic/value1").InnerText
+
+' If we have less than two digits stored, append this digit to it
+if PlayerNumber.Length() < 2
+    PlayerNumber += DigitPress
+Else
+    console.writeline("Number must be 1 or 2 digits!")
+End If
+
+' Set DynamicValue3 to player number before assignment
+API.Function("SetDynamicValue1", Value:=PlayerNumber)

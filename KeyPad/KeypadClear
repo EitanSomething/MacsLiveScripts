@@ -1,0 +1,2 @@
+console.writeline("Player Number Cleared")
+API.Function("SetDynamicValue1", Value:="")
