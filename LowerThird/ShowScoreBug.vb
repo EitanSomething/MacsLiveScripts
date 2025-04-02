@@ -9,6 +9,8 @@ API.Function("SetTextVisibleOff", Input:="Scorebug", SelectedName :="Home Name.T
 API.Function("SetTextVisibleOn", Input:="Scorebug", SelectedName:="RevealAwayName.Text")
 API.Function("SetTextVisibleOn", Input:="Scorebug", SelectedName:="RevealHomeName.Text")
 API.Function("TitleBeginAnimation", Input:="Scorebug", Value:="TransitionIn")
+API.Function("LayerOff", Input:="Scorebug",  Value:="2")
+
 Sleep(100)
 API.Function("LayerOn", Input:="Lower Third",  Value:="1")
 Sleep(1200)

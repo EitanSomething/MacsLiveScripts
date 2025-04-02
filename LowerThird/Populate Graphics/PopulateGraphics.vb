@@ -9,41 +9,77 @@ dim GameLocation as String = TeamData.selectSingleNode("/Teams/Location").InnerX
 dim HomeSchoolFolder as String = TeamData.selectSingleNode("/Teams/Home").InnerXML
 dim AwaySchoolFolder as String = TeamData.selectSingleNode("/Teams/Away").InnerXML
 
-dim HomeColor as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  &"/HomeColors/color").InnerXML
-dim HomeContrastColor as String= TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  &"/HomeColors/contrastColor").InnerXML
-dim HomeRank as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  &"/rank").InnerXML
+dim HomeColorPS as String = "/" & TeamData.selectSingleNode("/Teams/HomeColor").InnerXML & "Colors" & "/"
+dim AwayColorPS as String = "/" & TeamData.selectSingleNode("/Teams/AwayColor").InnerXML & "Colors" & "/"
+
+dim ShowTimeout as Boolean = Convert.ToBoolean(Team.selectSingleNode("/Teams/Timeouts").InnerXML)
+dim ShowConferenceRecord as Boolean = Convert.ToBoolean(Team.selectSingleNode("/Teams/ShowConferenceRecord").InnerXML)
+dim ShowRecords as Boolean = Convert.ToBoolean(Team.selectSingleNode("/Teams/ShowRecords").InnerXML)
+
+dim HomeRank as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  &"/Rank").InnerXML
+dim AwayRank as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder  &"/Rank").InnerXML
+dim HomeColor as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  & HomeColorPS & "color").InnerXML
+dim HomeContrastColor as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder   & HomeColorPS & "contrastColor").InnerXML
 dim HomeWins as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  &"/wins").InnerXML
 dim HomeLosses as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  &"/losses").InnerXML
 dim HomeConfRecord as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  &"/ConfRecord").InnerXML
-dim HomeRecord as String = "(" & HomeWins & "-" & HomeLosses & HomeConfRecord & ")"
-
 dim HomeTeamName as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  & "/TeamName").InnerXML
 dim HomeSchoolName as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  & "/SchoolName").InnerXML
 dim HomeSchoolAbbreviation as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder  & "/SchoolAbbreviation").InnerXML
 
-dim AwayColor as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder  &"/AwayColors/color").InnerXML
-dim AwayContrastColor as String= TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder  &"/AwayColors/contrastColor").InnerXML
-dim AwayRank as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder  &"/rank").InnerXML
-
+dim AwayColor as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder & AwayColorPS & "color").InnerXML
+dim AwayContrastColor as String= TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder & AwayColorPS & "contrastColor").InnerXML
 
 dim AwayWins as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder  & "/wins").InnerXML
 dim AwayLosses as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder  & "/losses").InnerXML
-dim AwayConfRecord as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder & "/ConfRecord").InnerXML
-dim AwayRecord as String = "(" & AwayWins & "-" & AwayLosses & AwayConfRecord & ")"
+dim AwayConfWins as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder & "/ConfWins").InnerXML
+dim AwayConfLosses as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder & "/ConfLosses").InnerXML
+dim AwayConfAbbrev as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder & "/ConfAbbrev").InnerXML
+dim AwayConfName as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder & "/ConfName").InnerXML
+
+dim HomeConfWins as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder & "/ConfWins").InnerXML
+dim HomeConfLosses as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder & "/ConfLosses").InnerXML
+dim HomeConfAbbrev as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder & "/ConfAbbrev").InnerXML
+dim HomeConfName as String = TeamData.selectSingleNode("/Teams/" & HomeSchoolFolder & "/ConfName").InnerXML
+
+dim HomeRecord as String = ""
+dim AwayRecord as String = ""
+If ShowRecords Then
+    If ShowConferenceRecord Then
+        AwayRecord = "(" & AwayWins & "-" & AwayLosses & ", " & AwayConfWins & "-" & AwayConfLosses & " " & AwayConfAbbrev & ")"
+        HomeRecord = "(" & HomeWins & "-" & HomeLosses & ", " & HomeConfWins & "-" & HomeConfLosses & " " & HomeConfAbbrev & ")"
+
+    Else
+        AwayRecord = "(" & AwayWins & "-" & AwayLosses & ")"
+        HomeRecord = "(" & HomeWins & "-" & HomeLosses & ")"
+    End If
+End If
+
 
 dim AwayTeamName as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder & "/TeamName").InnerXML
 dim AwaySchoolName as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder  & "/SchoolName").InnerXML
 dim AwaySchoolAbbreviation as String = TeamData.selectSingleNode("/Teams/" & AwaySchoolFolder  & "/SchoolAbbreviation").InnerXML
 
-API.Function("SetText", Input:="Scorebug", SelectedName :="RevealAwayName.Text", Value:=HomeSchoolName)
+
 API.Function("SetText", Input:="Scorebug", SelectedName :="Home Name.Text", Value:=HomeSchoolName)
-API.Function("SetText", Input:="Scorebug", SelectedName :="Home Team Name.Text", Value:=HomeSchoolName)
+
+HomeSchoolAbbreviation = HomeRank + HomeSchoolAbbreviation 
+dim HomeSchoolNameSB as String = HomeRank + " " + HomeSchoolName
+
+HomeSchoolName = HomeRank + HomeSchoolName 
+API.Function("SetText", Input:="Scorebug", SelectedName :="RevealAwayName.Text", Value:=HomeSchoolName)
+API.Function("SetText", Input:="Scorebug", SelectedName :="Home Team Name.Text", Value:=HomeSchoolNameSB)
 
 
-API.Function("SetText", Input:="Scorebug", SelectedName :="RevealHomeName.Text", Value:=AwaySchoolName)
 API.Function("SetText", Input:="Scorebug", SelectedName :="Away Name.Text", Value:=AwaySchoolName)
-API.Function("SetText", Input:="Scorebug", SelectedName :="Away Team Name.Text", Value:=AwaySchoolName)
 
+AwaySchoolAbbreviation =  AwayRank + AwaySchoolAbbreviation 
+dim AwaySchoolNameSB as String = AwayRank + " " + AwaySchoolName 
+
+AwaySchoolName = AwayRank + AwaySchoolName 
+
+API.Function("SetText", Input:="Scorebug", SelectedName :="Away Team Name.Text", Value:=AwaySchoolNameSB)
+API.Function("SetText", Input:="Scorebug", SelectedName :="RevealHomeName.Text", Value:=AwaySchoolName)
 
 API.Function("SetText", Input:="Scorebug", SelectedName :="Home Record.Text", Value:=HomeRecord)
 API.Function("SetText", Input:="Scorebug", SelectedName :="Away Record.Text", Value:=AwayRecord)
